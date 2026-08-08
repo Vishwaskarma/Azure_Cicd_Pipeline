@@ -2,7 +2,7 @@ name: Deploy to Azure VM
 
 on:
   push:
-    branches: [ main ] # Agar master branch hai toh 'master' likhein
+    branches: [ main ]
 
 jobs:
   deploy:
@@ -10,10 +10,10 @@ jobs:
 
     steps:
     - name: Checkout Code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Deploy via SSH to Azure VM
-      uses: appleboy/ssh-action@v1.0.0
+      uses: appleboy/ssh-action@v1.0.3
       with:
         host: ${{ secrets.AZURE_VM_IP }}
         username: ${{ secrets.AZURE_VM_USER }}
@@ -21,5 +21,5 @@ jobs:
         script: |
           cd ~/Azure_Cicd_Pipeline
           git pull origin main
-          docker-compose down
-          docker-compose up -d --build
+          docker compose down
+          docker compose up -d --build

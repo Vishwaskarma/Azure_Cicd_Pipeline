@@ -19,7 +19,7 @@ jobs:
         username: ${{ secrets.AZURE_VM_USER }}
         key: ${{ secrets.AZURE_SSH_KEY }}
         script: |
-          cd ~/YOUR_VM_REPO_FOLDER_NAME
+          cd ~/Azure_Cicd_Pipeline
           git pull origin main
           docker-compose down
           docker-compose up -d --build

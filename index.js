@@ -9,6 +9,10 @@ app.get('/about',(req,res)=>{
     res.send("about page is working");
 
 })
+app.get('/testing',(req,res)=>{
+// Example change in index.js
+res.send("🚀 CI/CD Pipeline Working Successfully via GitHub Actions!");
+})
 app.get('/services',(req,res)=>{
     res.send("about page is working");
 })

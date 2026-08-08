@@ -1,0 +1,25 @@
+name: Deploy to Azure VM
+
+on:
+  push:
+    branches: [ main ] # Agar master branch hai toh 'master' likhein
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Deploy via SSH to Azure VM
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.AZURE_VM_IP }}
+        username: ${{ secrets.AZURE_VM_USER }}
+        key: ${{ secrets.AZURE_SSH_KEY }}
+        script: |
+          cd ~/YOUR_VM_REPO_FOLDER_NAME
+          git pull origin main
+          docker-compose down
+          docker-compose up -d --build
